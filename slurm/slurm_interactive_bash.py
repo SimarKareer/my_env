@@ -35,12 +35,12 @@ args = parser.parse_args()
 
 #--nodes 1 --ntasks {args.numgpu}
 cmd = (
-    f"srun --gres gpu:{args.numgpu}"
+    f"salloc --gres gpu:{args.numgpu}"
     f" --cpus-per-task {args.num_cpus}"
 )
 
 if args.exclude:
-    cmd += " --exclude {args.exclude}"
+    cmd += f" --exclude {args.exclude}"
 
 if args.overcap:
     cmd += " --account overcap --partition overcap"
@@ -58,8 +58,6 @@ if args.want != '':
 
 if args.gpu != "":
     cmd += f' --constraint={args.gpu}'
-
-cmd += " --pty bash"
 
 print("Executing: ", cmd)
 
