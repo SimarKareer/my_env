@@ -15,7 +15,7 @@ parser.add_argument(
     '-w','--want', type=str, default='', help='name of node that you want to run the job on'
 )
 parser.add_argument(
-    '-p','--partition', type=str, default='short', help='partition to run the job on'
+    '-p','--partition', type=str, default='hoffman-lab', help='partition to run the job on'
 )
 parser.add_argument(
     '-o','--overcap', action='store_true', help='indicates submission to overcap partition'
@@ -35,7 +35,7 @@ args = parser.parse_args()
 
 #--nodes 1 --ntasks {args.numgpu}
 cmd = (
-    f"salloc --gres gpu:{args.numgpu}"
+    f"salloc --gpus {args.gpu}:{args.numgpu}"
     f" --cpus-per-task {args.num_cpus}"
 )
 
@@ -55,9 +55,6 @@ if args.want != '':
 
 # if args.quadro:
 #     cmd += f' --constraint claptrap,glados,olivaw,oppy,sophon,zima'
-
-if args.gpu != "":
-    cmd += f' --constraint={args.gpu}'
 
 print("Executing: ", cmd)
 

@@ -15,7 +15,7 @@ if '-d' in args:
     dont_save = True
 
 if '-b' in args:
-    os.system("sh scripts/blacklist.sh")
+    os.system("sh /coc/testnvme/skareer6/home/my_env/slurm/blacklist.sh")
     args = [f for f in args if f != '-b']
 
 if '-o' in args:
